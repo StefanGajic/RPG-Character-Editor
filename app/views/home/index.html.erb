@@ -1,0 +1,32 @@
+<div class="jumbotron text-center">
+  <h1>Welcome to the RPG character editor</h1>
+</div>
+
+<div class="image-logo">
+  <%= image_tag("RPG-maker-logo.jpg", :alt => "rpg maker logo", :class => "style_image") %>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h2>You can see all characters by clicking CHARACTERS</h2>
+      <%= link_to 'CHARACTERS', character_types_path, :class => "btn btn-primary", id: "all-characters" %>
+    </div>
+    <div class="col-sm-4">
+      <% if user_signed_in? %>
+        <h2>Create your character now by clicking NEW CHARACTER button bellow</h2>
+        <%= link_to 'NEW CHARACTER', new_character_type_path, :class => "btn btn-info", id: "new-character" %>
+        </div>
+
+        <div class="col-sm-4">
+          <h4>Welcome <%= current_user.username %></h4>
+          <%= link_to('Edit user', edit_user_registration_path, :class => "btn btn-success") %>
+          <%= link_to('Logout', destroy_user_session_path, method: :delete, :class => "btn btn-danger", id: "logout") %>
+      <% else %>
+        <%= link_to('Login', new_user_session_path, :class => "btn btn-info", id: "login") %>
+        <%= link_to('Register', new_user_registration_path, :class => "btn btn-warning", id: "sign-up") %>
+      <% end %>
+
+      </div>
+      </div>
+</div>

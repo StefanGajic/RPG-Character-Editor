@@ -1,0 +1,23 @@
+<div id="attributes">
+  <div id="attributes-<%= character_attribute.id %>">
+    <div id="new-attribute">
+    <h2>Attribute: </h2>
+    <p> <%= character_attribute.name %>
+      <% if character_attribute.icon.attached? %>
+      <%= image_tag character_attribute.icon, width: "50px" %>
+      <% else %>
+        <%= image_tag("no-image.png", :alt => "no image", width: "50px") %>
+      <% end %></p>
+    <p>With Value of: <%= character_attribute.value %></p>
+
+    <% if user_signed_in? && @character_type.user_id == current_user.id %>
+      <p><u>Edit this attribute</u></p>
+      <%= render 'character_attributes/form', character_attribute: character_attribute, remote: true %>
+      <br>
+      <%= link_to "Delete attribute", [@character_type, character_attribute], method: :delete, data: {confirm: "Are you sure you want to delete this attribute?"}, remote: true, :class => "btn btn-danger" %>
+      <br>
+      <hr>
+      </div>
+    <% end %>
+    </div>
+</div>

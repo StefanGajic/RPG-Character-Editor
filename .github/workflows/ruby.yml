@@ -17,7 +17,17 @@ jobs:
   test:
 
     runs-on: ubuntu-latest
-
+    services:
+      db:
+        
+        image: postgres:12
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
@@ -29,5 +39,10 @@ jobs:
         ruby-version: 2.7.1
     - name: Install dependencies
       run: bundle install
+      
     - name: Run RSpec
+      env:
+          DATABASE_URL: postgres://sonja:@localhost:5432/db/rpg-test
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
       run: COVERAGE=true bundle exec rspec  --require rails_helper

@@ -14,39 +14,40 @@ on:
     branches: [ master ]
 
 jobs:
-  test:
-
+  build:
     runs-on: ubuntu-latest
-    
-    container:
-      image: timbru31/ruby-node:latest
-      
+
     services:
       postgres:
-        image: postgres:12
-        env:
-          POSTGRES_USER: sonja
-          POSTGRES_PASSWORD: ""
-          POSTGRES_DB: db/rpg-test
-        ports:
-          - 5432:5432
+        image: postgres:12.2
+        ports: ["5432:5432"]
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-    
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby
-    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-    # change this to (see https://github.com/ruby/setup-ruby#versioning):
-    # uses: ruby/setup-ruby@v1
-      uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
+    - uses: actions/checkout@v1
+
+    - name: Set up Ruby 2.7.1
+      uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.7.1
-    - name: Install dependencies
-      run: bundle install
-      
-    - name: Run RSpec
+        ruby-version: 2.7.x
+
+    - name: Install PostgreSQL 12 client
+      run: |
+        sudo apt-get -yqq install libpq-dev
+
+    - name: Build App
       env:
-          DATABASE_URL: postgres://sonja:@localhost:5432/db/rpg-test
-          RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
-      run: COVERAGE=true bundle exec rspec  --require rails_helper
+        PGHOST: localhost
+        PGUSER: sonja
+        RAILS_ENV: test
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        bin/rails db:setup
+
+    - name: Run Tests
+      env:
+        PGHOST: localhost
+        PGUSER: sonja
+        RAILS_ENV: test
+      run: bundle exec rspec

@@ -50,6 +50,5 @@ jobs:
         PGHOST: localhost
         PGUSER: postgres
         RAILS_ENV: test
-      run: |
-          bundle exec rspec
-          bundle exec cucumber
+      run: bundle exec rspec
+

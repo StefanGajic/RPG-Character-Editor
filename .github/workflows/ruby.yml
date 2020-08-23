@@ -19,7 +19,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:12.2
+        image: postgres:11.5
         ports: ["5432:5432"]
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
@@ -31,14 +31,14 @@ jobs:
       with:
         ruby-version: 2.7.x
 
-    - name: Install PostgreSQL 12 client
+    - name: Install PostgreSQL 11 client
       run: |
         sudo apt-get -yqq install libpq-dev
 
     - name: Build App
       env:
         PGHOST: localhost
-        PGUSER: sonja
+        PGUSER: postgres
         RAILS_ENV: test
       run: |
         gem install bundler
@@ -48,6 +48,6 @@ jobs:
     - name: Run Tests
       env:
         PGHOST: localhost
-        PGUSER: sonja
+        PGUSER: postgres
         RAILS_ENV: test
       run: bundle exec rspec

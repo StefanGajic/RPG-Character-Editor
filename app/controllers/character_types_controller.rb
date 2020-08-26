@@ -26,6 +26,7 @@ class CharacterTypesController < ApplicationController
       if @character_type.save
         format.html { redirect_to @character_type }
       else
+        flash.now[:alert] = "Character not saved! Please provide a unique name"
         format.html { render :new }
       end
     end

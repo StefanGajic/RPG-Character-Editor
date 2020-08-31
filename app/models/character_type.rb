@@ -1,7 +1,7 @@
 class CharacterType < ApplicationRecord
-  belongs_to :user, optional: true, inverse_of: :character_types
+  belongs_to :user
   has_one_attached :avatar
-  has_many :character_attributes, dependent: :destroy, inverse_of: :character_type, :autosave => true
+  has_many :character_attributes, dependent: :destroy, inverse_of: :character_type, autosave: true
 
   accepts_nested_attributes_for :character_attributes, allow_destroy: true
 

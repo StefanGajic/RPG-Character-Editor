@@ -27,6 +27,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'kaminari'
 
+gem 'cancancan'
+
 gem "aws-sdk-s3", require: false
 
 # Use Active Storage variant

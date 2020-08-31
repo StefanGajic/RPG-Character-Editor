@@ -1,7 +1,7 @@
 class CharacterTypesController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_character_type, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:edit, :update, :destroy]
 
   def index
     @character_types = CharacterType.page params[:page]
@@ -58,9 +58,4 @@ class CharacterTypesController < ApplicationController
     params.require(:character_type).permit(:name, :avatar)
   end
 
-  def logged_in_user
-    if current_user != @character_type.user
-      redirect_to character_type_path
-    end
-  end
 end

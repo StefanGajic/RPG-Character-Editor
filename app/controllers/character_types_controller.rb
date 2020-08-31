@@ -12,6 +12,8 @@ class CharacterTypesController < ApplicationController
 
   def new
     @character_type = CharacterType.new
+
+    @character_type.character_attributes.build
   end
 
   def edit
@@ -55,7 +57,7 @@ class CharacterTypesController < ApplicationController
   end
 
   def character_type_params
-    params.require(:character_type).permit(:name, :avatar)
+    params.require(:character_type).permit(:name, :avatar, character_attributes_attributes: [:name, :value, :icon, :_destroy])
   end
 
   def logged_in_user

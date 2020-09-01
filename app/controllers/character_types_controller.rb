@@ -7,6 +7,10 @@ class CharacterTypesController < ApplicationController
     @character_types = CharacterType.page params[:page]
   end
 
+  def my_characters
+    @character_types = current_user.character_types.page params[:page]
+  end
+
   def show
   end
 

@@ -14,8 +14,12 @@
     </div>
     <div class="col-sm-4">
       <% if user_signed_in? %>
-        <h2>Create your character now by clicking NEW CHARACTER button bellow</h2>
+        <h2>Create your character by clicking NEW CHARACTER button
+        or see all your characters by clicking YOUR CHARACTERS</h2>
         <%= link_to 'NEW CHARACTER', new_character_type_path, :class => "btn btn-info", id: "new-character" %>
+        <br>
+        <br>
+        <%= link_to 'YOUR CHARACTERS', my_characters_path, :class => "btn btn-warning" %>
         </div>
 
         <div class="col-sm-4">

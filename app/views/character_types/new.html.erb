@@ -1,14 +1,36 @@
 <div class="jumbotron text-center">
   <h1>Make New Character</h1>
 </div>
-<div id="error_explanation">
-  <% if flash[:alert] %>
-    <h2><%= flash[:alert] %></h2>
-  <% end %>
-</div>
+  <%= form_with(model: @character_type) do |f| %>
+    <div class="form-group" style="text-align: center">
+      <%= f.label :name %>
+      <br>
+      <%= f.text_field :name %>
+    </div>
 
-<%= render 'form', character_type: @character_type %>
-<br>
-<div class="navigation-links">
-  <%= link_to 'Back', character_types_path, :class => "btn btn-success" %>
-</div>
+    <div class="form-group" style="text-align: center">
+      <%= f.label :avatar %>
+      <br>
+      <%= f.file_field :avatar %>
+    </div>
+
+    <div class="actions" style="text-align: center">
+      <%= f.submit :class => "btn btn-primary", id: "update-character" %>
+    </div>
+    <br>
+    <br>
+    <div id="character_attributes">
+      <h2>Add an attribute:</h2>
+      <%= f.fields_for :character_attributes do |character_attribute| %>
+        <%= render "character_attribute_fields", f: character_attribute %>
+      <% end %>
+      <div class='links' id="add_link">
+        <%= link_to_add_association 'Add new attribute', f, :character_attributes, class: 'btn btn-primary' %>
+      </div>
+    </div>
+    <br>
+  <% end %>
+  <br>
+  <div class="navigation-links">
+    <%= link_to 'Back', character_types_path, :class => "btn btn-success" %>
+  </div>

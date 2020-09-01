@@ -35,7 +35,7 @@ class CharacterAttributesController < ApplicationController
   private
 
   def set_character_attribute
-    @character_attribute = CharacterAttribute.find(params[:id])
+    @character_attribute = @character_type.character_attributes.find(params[:id])
   end
 
   def character_attribute_params

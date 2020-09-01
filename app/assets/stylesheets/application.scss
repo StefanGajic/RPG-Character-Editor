@@ -48,3 +48,22 @@
   text-align: center;
   padding-top: 30px;
 }
+
+.style_logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+}
+
+#error_explanation {
+  color: red;
+}
+
+#topnav {
+  margin-top: 40px;
+  li {
+    display: inline;
+    padding:  5px 7px;
+  }
+}

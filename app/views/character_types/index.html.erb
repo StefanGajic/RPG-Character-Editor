@@ -33,6 +33,9 @@
 
 <% if user_signed_in? %>
   <%= link_to 'New Character Type', new_character_type_path, :class => "btn btn-info" %>
+    <br>
+    <br>
+    <%= link_to 'YOUR CHARACTERS', my_characters_path, :class => "btn btn-warning" %>
 <% end %>
 <br>
 <br>

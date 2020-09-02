@@ -6,7 +6,7 @@
 <div id="character_attributes">
 <br>
 <% if @character_type.character_attributes.any? %>
-  <%= render @character_type.character_attributes, remote: true %>
+  <%= render @character_type.character_attributes.includes([icon_attachment: :blob]), remote: true %>
 <% end %>
   </div>
 <div id="new-attribute">

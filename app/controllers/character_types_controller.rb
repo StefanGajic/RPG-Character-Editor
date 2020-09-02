@@ -7,11 +7,17 @@ class CharacterTypesController < ApplicationController
     @character_types = CharacterType.page params[:page]
   end
 
+  def my_characters
+    @character_types = current_user.character_types.page params[:page]
+  end
+
   def show
   end
 
   def new
     @character_type = CharacterType.new
+
+    @character_type.character_attributes.build
   end
 
   def edit
@@ -55,7 +61,7 @@ class CharacterTypesController < ApplicationController
   end
 
   def character_type_params
-    params.require(:character_type).permit(:name, :avatar)
+    params.require(:character_type).permit(:name, :avatar, character_attributes_attributes: [:name, :value, :icon, :_destroy])
   end
 
 end

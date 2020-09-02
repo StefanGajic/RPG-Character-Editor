@@ -31,6 +31,8 @@ gem 'cancancan'
 
 gem "aws-sdk-s3", require: false
 
+gem 'cocoon'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

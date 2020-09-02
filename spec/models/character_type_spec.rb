@@ -28,7 +28,7 @@ RSpec.describe CharacterType, type: :model do
   end
 
   it 'name is not unique' do
-    character_type = CharacterType.new(name: 'test')
+    CharacterType.new(name: 'test')
     new_character_type = CharacterType.new(name: 'test')
     expect(new_character_type).to_not be_valid
   end

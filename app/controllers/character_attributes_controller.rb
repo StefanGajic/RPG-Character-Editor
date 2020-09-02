@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Character Attributes Controller
 class CharacterAttributesController < ApplicationController
   load_and_authorize_resource :character_type
   load_and_authorize_resource :character_attribute, through: :character_type

@@ -6,7 +6,7 @@ RSpec.describe CharacterTypesController, type: :controller do
   login_user
 
   let(:valid_attributes) do
-    {name: 'Test character!', avatar: 'some image'}
+    { name: 'Test character!', avatar: 'some image' }
   end
 
   let(:valid_session) { {} }

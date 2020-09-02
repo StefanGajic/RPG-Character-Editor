@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'application_system_test_case'
-
+# character types test
 class CharacterTypesTest < ApplicationSystemTestCase
   setup do
     @character_type = character_types(:one)

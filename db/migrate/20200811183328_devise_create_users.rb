@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Devise Create Users
 class DeviseCreateUsers < ActiveRecord::Migration[6.0]
   def change
     create_table :users do |t|

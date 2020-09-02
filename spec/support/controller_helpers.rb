@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# controller helpers
 module ControllerHelpers
   def log_in(user)
     warden = request.env['warden']

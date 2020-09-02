@@ -53,12 +53,10 @@ jobs:
           PGUSER: postgres
           RAILS_ENV: test
         run: bundle exec rspec
+      - name: Security vulnerabilities using Brakeman
+        run: brakeman
       - name: Analyze code statically using Reek
-        run: reek *
-      - name: Brakeman
-        uses: devmasx/brakeman-linter-action@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: reek app/model/
       - name: Run RuboCop
-        run: bundle exec rubocop --parallel
+        run: rubocop app/models/
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Character Type
 class CharacterType < ApplicationRecord
   belongs_to :user
   has_one_attached :avatar

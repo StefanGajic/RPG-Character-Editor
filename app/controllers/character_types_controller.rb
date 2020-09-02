@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Character Types Controller
 class CharacterTypesController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!, except: %i[show index]

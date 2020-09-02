@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-
+# Character Types Controller Test
 class CharacterTypesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @character_type = character_types(:one)

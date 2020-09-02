@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class CharacterAttributesController < ApplicationController
   load_and_authorize_resource :character_type
   load_and_authorize_resource :character_attribute, through: :character_type
   before_action :set_character_type
-  before_action :set_character_attribute, only: [:update, :destroy]
+  before_action :set_character_attribute, only: %i[update destroy]
 
   def create
     @character_attribute = @character_type.character_attributes.build(character_attribute_params)
@@ -23,7 +25,6 @@ class CharacterAttributesController < ApplicationController
       end
     end
   end
-
 
   def destroy
     @character_attribute.destroy
@@ -46,5 +47,4 @@ class CharacterAttributesController < ApplicationController
   def set_character_type
     @character_type = CharacterType.find(params[:character_type_id])
   end
-
 end

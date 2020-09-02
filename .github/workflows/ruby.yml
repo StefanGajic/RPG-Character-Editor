@@ -52,6 +52,18 @@ jobs:
           PGHOST: localhost
           PGUSER: postgres
           RAILS_ENV: test
-        run:  |
-          bundle exec rspec
-          bundle exec brakeman -z
+        run: bundle exec rspec
+      - name: Analyze code statically using Reek
+        uses: moneyforward/reek-action@v0
+        run: reek *
+      - name: Brakeman
+        uses: devmasx/brakeman-linter-action@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: bundle exec brakeman -z
+      - name: Build and run RuboCop
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bundle exec rubocop --parallel
+

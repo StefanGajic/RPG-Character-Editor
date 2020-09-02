@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CharacterType < ApplicationRecord
   belongs_to :user
   has_one_attached :avatar
@@ -8,5 +10,4 @@ class CharacterType < ApplicationRecord
   validates :name, uniqueness: true, presence: true
 
   paginates_per 5
-
 end

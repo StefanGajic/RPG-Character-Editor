@@ -55,12 +55,10 @@ jobs:
         run: bundle exec rspec
       - name: Analyze code statically using Reek
         uses: moneyforward/reek-action@v0
-        run: reek *
       - name: Brakeman
         uses: devmasx/brakeman-linter-action@v1.0.0
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: bundle exec brakeman -z
       - name: Build and run RuboCop
         run: |
           bundle config path vendor/bundle

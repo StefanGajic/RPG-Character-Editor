@@ -1,7 +1,8 @@
 class CharacterAttributesController < ApplicationController
+  load_and_authorize_resource :character_type
+  load_and_authorize_resource :character_attribute, through: :character_type
   before_action :set_character_type
   before_action :set_character_attribute, only: [:update, :destroy]
-  before_action :logged_in_user, only: [:update, :destroy]
 
   def create
     @character_attribute = @character_type.character_attributes.build(character_attribute_params)
@@ -46,9 +47,4 @@ class CharacterAttributesController < ApplicationController
     @character_type = CharacterType.find(params[:character_type_id])
   end
 
-  def logged_in_user
-    if current_user != @character_type.user
-      redirect_to character_type_path
-    end
-  end
 end

@@ -8,10 +8,8 @@ class CharacterAttributesController < ApplicationController
 
     respond_to do |format|
       if @character_attribute.save
-        format.js {  }
+        format.js
         format.html { redirect_to @character_type }
-      else
-        format.js { render :create }
       end
     end
   end
@@ -19,18 +17,17 @@ class CharacterAttributesController < ApplicationController
   def update
     respond_to do |format|
       if @character_attribute.update(character_attribute_params)
-        format.js { }
+        format.js
         format.html { redirect_to @character_type }
-      else
-        format.js { render :update }
       end
     end
   end
 
+
   def destroy
     @character_attribute.destroy
     respond_to do |format|
-      format.js { }
+      format.js
       format.html { redirect_to @character_type }
     end
   end
@@ -38,7 +35,7 @@ class CharacterAttributesController < ApplicationController
   private
 
   def set_character_attribute
-    @character_attribute = CharacterAttribute.find(params[:id])
+    @character_attribute = @character_type.character_attributes.find(params[:id])
   end
 
   def character_attribute_params

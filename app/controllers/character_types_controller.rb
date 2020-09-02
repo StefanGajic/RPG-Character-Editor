@@ -3,8 +3,8 @@
 # Character Types Controller
 class CharacterTypesController < ApplicationController
   load_and_authorize_resource
-  before_action :authenticate_user!, except: %i[show index]
-  before_action :set_character_type, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: [:show, :index]
+  before_action :set_character_type, only: [:show, :edit, :update, :destroy]
 
   def index
     @character_types = CharacterType.page params[:page]
@@ -14,7 +14,8 @@ class CharacterTypesController < ApplicationController
     @character_types = current_user.character_types.page params[:page]
   end
 
-  def show; end
+  def show
+  end
 
   def new
     @character_type = CharacterType.new
@@ -22,37 +23,32 @@ class CharacterTypesController < ApplicationController
     @character_type.character_attributes.build
   end
 
-  def edit; end
+  def edit
+  end
 
   def create
     @character_type = CharacterType.new(character_type_params)
 
     @character_type.user = current_user
 
-    respond_to do |format|
-      if @character_type.save
-        format.html { redirect_to @character_type }
-      else
-        format.html { render :new }
-      end
+    if @character_type.save
+      redirect_to @character_type
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @character_type.update(character_type_params)
-        format.html { redirect_to @character_type }
-      else
-        format.html { render :edit }
-      end
+    if @character_type.update(character_type_params)
+      redirect_to @character_type
+    else
+      render :edit
     end
   end
 
   def destroy
     @character_type.destroy
-    respond_to do |format|
-      format.html { redirect_to character_types_url }
-    end
+    redirect_to character_types_url
   end
 
   private
@@ -62,6 +58,6 @@ class CharacterTypesController < ApplicationController
   end
 
   def character_type_params
-    params.require(:character_type).permit(:name, :avatar, character_attributes_attributes: %i[name value icon _destroy])
+    params.require(:character_type).permit(:name, :avatar, character_attributes_attributes: [:name, :value, :icon, :_destroy])
   end
 end

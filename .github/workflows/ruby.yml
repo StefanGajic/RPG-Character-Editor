@@ -56,7 +56,7 @@ jobs:
       - name: Security vulnerabilities using Brakeman
         run: brakeman
       - name: Analyze code statically using Reek
-        run: reek app/model/
+        run: reek *
       - name: Run RuboCop
-        run: rubocop app/models/
+        run: rubocop
 

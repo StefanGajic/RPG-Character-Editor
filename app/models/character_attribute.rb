@@ -6,4 +6,8 @@ class CharacterAttribute < ApplicationRecord
   has_one_attached :icon
 
   validates_presence_of :character_type
+
+  validates :name, presence: true
+  validates :value, presence: true
+
 end

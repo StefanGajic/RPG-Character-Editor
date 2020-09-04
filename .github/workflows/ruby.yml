@@ -53,3 +53,10 @@ jobs:
           PGUSER: postgres
           RAILS_ENV: test
         run: bundle exec rspec
+      - name: Security vulnerabilities using Brakeman
+        run: brakeman
+      - name: Analyze code statically using Reek
+        run: reek *
+      - name: Run RuboCop
+        run: rubocop
+

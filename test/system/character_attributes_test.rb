@@ -1,45 +1,47 @@
-require "application_system_test_case"
+# frozen_string_literal: true
 
+require 'application_system_test_case'
+# Character Attributes Test
 class CharacterAttributesTest < ApplicationSystemTestCase
   setup do
     @character_attribute = character_attributes(:one)
   end
 
-  test "visiting the index" do
+  test 'visiting the index' do
     visit character_attributes_url
-    assert_selector "h1", text: "Character Attributes"
+    assert_selector 'h1', text: 'Character Attributes'
   end
 
-  test "creating a Character attribute" do
+  test 'creating a Character attribute' do
     visit character_attributes_url
-    click_on "New Character Attribute"
+    click_on 'New Character Attribute'
 
-    fill_in "Name", with: @character_attribute.name
-    fill_in "Value", with: @character_attribute.value
-    click_on "Create Character attribute"
+    fill_in 'Name', with: @character_attribute.name
+    fill_in 'Value', with: @character_attribute.value
+    click_on 'Create Character attribute'
 
-    assert_text "Character attribute was successfully created"
-    click_on "Back"
+    assert_text 'Character attribute was successfully created'
+    click_on 'Back'
   end
 
-  test "updating a Character attribute" do
+  test 'updating a Character attribute' do
     visit character_attributes_url
-    click_on "Edit", match: :first
+    click_on 'Edit', match: :first
 
-    fill_in "Name", with: @character_attribute.name
-    fill_in "Value", with: @character_attribute.value
-    click_on "Update Character attribute"
+    fill_in 'Name', with: @character_attribute.name
+    fill_in 'Value', with: @character_attribute.value
+    click_on 'Update Character attribute'
 
-    assert_text "Character attribute was successfully updated"
-    click_on "Back"
+    assert_text 'Character attribute was successfully updated'
+    click_on 'Back'
   end
 
-  test "destroying a Character attribute" do
+  test 'destroying a Character attribute' do
     visit character_attributes_url
     page.accept_confirm do
-      click_on "Destroy", match: :first
+      click_on 'Destroy', match: :first
     end
 
-    assert_text "Character attribute was successfully destroyed"
+    assert_text 'Character attribute was successfully destroyed'
   end
 end

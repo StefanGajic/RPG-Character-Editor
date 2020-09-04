@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Create Character Types
 class CreateCharacterTypes < ActiveRecord::Migration[6.0]
   def change
     create_table :character_types do |t|

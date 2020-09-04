@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Character Attributes Controller
 class CharacterAttributesController < ApplicationController
   load_and_authorize_resource :character_type
   load_and_authorize_resource :character_attribute, through: :character_type
@@ -24,7 +27,6 @@ class CharacterAttributesController < ApplicationController
     end
   end
 
-
   def destroy
     @character_attribute.destroy
     respond_to do |format|
@@ -46,5 +48,4 @@ class CharacterAttributesController < ApplicationController
   def set_character_type
     @character_type = CharacterType.find(params[:character_type_id])
   end
-
 end

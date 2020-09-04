@@ -13,7 +13,7 @@
 <div id="character_attributes">
 <% if @character_type.character_attributes.any? %>
   <br>
-    <%= render @character_type.character_attributes, remote: true %>
+    <%= render @character_type.character_attributes.includes([icon_attachment: :blob]), remote: true %>
     </div>
   <% if user_signed_in? %>
     <% if @character_type.user_id == current_user.id %>

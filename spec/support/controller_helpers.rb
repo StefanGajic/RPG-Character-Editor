@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# controller helpers
 module ControllerHelpers
   def log_in(user)
     warden = request.env['warden']
@@ -5,5 +8,4 @@ module ControllerHelpers
     allow(warden).to receive(:authenticate!).and_return(user)
     allow(controller).to receive(:current_user).and_return(user)
   end
-
 end

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Character Types Controller
 class CharacterTypesController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!, except: [:show, :index]
@@ -28,30 +31,24 @@ class CharacterTypesController < ApplicationController
 
     @character_type.user = current_user
 
-    respond_to do |format|
-      if @character_type.save
-        format.html { redirect_to @character_type }
-      else
-        format.html { render :new }
-      end
+    if @character_type.save
+      redirect_to @character_type
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @character_type.update(character_type_params)
-        format.html { redirect_to @character_type }
-      else
-        format.html { render :edit }
-      end
+    if @character_type.update(character_type_params)
+      redirect_to @character_type
+    else
+      render :edit
     end
   end
 
   def destroy
     @character_type.destroy
-    respond_to do |format|
-      format.html { redirect_to character_types_url }
-    end
+    redirect_to character_types_url
   end
 
   private
@@ -63,5 +60,4 @@ class CharacterTypesController < ApplicationController
   def character_type_params
     params.require(:character_type).permit(:name, :avatar, character_attributes_attributes: [:name, :value, :icon, :_destroy])
   end
-
 end

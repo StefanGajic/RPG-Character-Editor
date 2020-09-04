@@ -1,8 +1,20 @@
 <div class="jumbotron text-center">
   <h1>Make New Character</h1>
+  <h3>Add desirable amount of attributes</h3>
+  <h4>if you don't want any click on Remove attribute button bellow</h4>
 </div>
-  <%= form_with(model: @character_type) do |f| %>
-    <div class="form-group" style="text-align: center">
+  <%= form_for @character_type do |f| %>
+  <% if @character_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@character_type.errors.count, "error") %> prohibited this character_type from being saved:</h2>
+      <ul>
+        <% @character_type.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group" style="text-align: center">
       <%= f.label :name %>
       <br>
       <%= f.text_field :name %>
